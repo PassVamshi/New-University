@@ -16,7 +16,20 @@ export default function Dashboard() {
                             EAMCET / ECET / POLYCET / ICET / PGECET Code : HOLY
                             HOLY TRINITY EDUCATIONAL SOCIETY, HYDERABAD</strong></div>
                 </Col></Row>
-
+            <Row height='700px' className='pt-5'>
+                <Col style={{ borderRadius: '10px' }} className="bg-info">
+                    <h1 className='text-white'>Latest News</h1>
+                    <h5 className='text-center text-white pt-5 pb-5'>
+                        ELYSIUM - TECHNICAL FEST
+                    </h5>
+                </Col>
+                <Col className='bg-danger ' style={{ marginLeft: '10px', borderRadius: '10px' }}>
+                    <h1 className='text-white pt-3 '>College Teaser</h1>
+                </Col>
+                <Col className='bg-success' style={{ marginLeft: '10px', borderRadius: '10px' }}>
+                    <h1 className='text-white'>Upcoming events</h1>
+                </Col>
+            </Row>
         </Fragment>
     )
 }
