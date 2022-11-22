@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 import ResizeDetector from 'react-resize-detector';
 
 import AppMain from '../../Layout/AppMain';
 import Login from '../../LoginComponents/Login';
+import LoginFirst from '../../LoginComponents/LoginFirst';
 
 class Main extends React.Component {
     constructor(props) {
@@ -45,7 +46,9 @@ class Main extends React.Component {
                 )}>
                     <AppMain />
                     <ResizeDetector handleWidth onResize={this.onResize} />
-                </div> : <Login />}
+                </div> : <Redirect to='/Login' />
+                    //<Login />
+                }
             </Fragment>
         )
     }

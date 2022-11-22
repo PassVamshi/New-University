@@ -1,12 +1,12 @@
 import axios from "axios"
 import { Form, Formik } from "formik"
 import { Fragment, useState } from "react"
-import { Link, Redirect, Route } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Button, Card, CardBody, Col, Input, Row } from "reactstrap"
 import * as Yup from 'yup'
 import InputBox from "../Components/InputBox"
-import { AlertError, AlertSuccess, Test } from "../Components/Toast"
-import { Main } from "../Menu/Student/AddStudents"
+import { AlertError, AlertSuccess } from "../Components/Toast"
+import SweetAlert from "../Menu/Events/Sweetalert"
 // import { alertError } from "../Components/Toast"
 
 
@@ -23,21 +23,25 @@ const Login = (props) => {
     })
     const Success = (data) => {
         localStorage.setItem('login', data);
-        window.location.reload();
+        props.history.push('/Dashboard')
     }
+
+
+
     const handleSubmit = async (values) => {
         try {
             if (values.role == "Students") values.roleId = 1;
             if (values.role == "Teachers") values.roleId = 2;
 
             await axios.get(`https://localhost:44323/api/Register/Login?email=${values.email}&password=${values.password}&roleId=${values.roleId}`).then((res) => {
-                // SweetAlertMesssage("Successful")
-                // AlertSuccess("Succesful")
                 Success(res.data.id);
             })
-            AlertSuccess("Succesfully Logged")
+            SweetAlert.handleClickTop("Successfully logged in.")
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
         } catch {
-           AlertError("Invalid details")
+            SweetAlert.handleClick12("Invalid details")
             // alertError();
         }
 
@@ -46,7 +50,7 @@ const Login = (props) => {
         <Row md='12' className="pt-5">
             <Col md='5'></Col>
             <Col md='3'>
-                <Card className="pt-4" >
+                <Card className="pt-4" style={{ borderRadius: '15px' }}>
                     <CardBody>
                         <Formik
                             initialValues={{ email: '', password: '', role: '', roleId: 0 }}

@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import { Col, Row } from 'reactstrap'
 import image from '../../../Images/CollegeLogo.jpg'
+import video from '../../../Images/Video1.mp4'
 
 export default function Dashboard() {
 
@@ -24,10 +26,18 @@ export default function Dashboard() {
                     </h5>
                 </Col>
                 <Col className='bg-danger ' style={{ marginLeft: '10px', borderRadius: '10px' }}>
-                    <h1 className='text-white pt-3 '>College Teaser</h1>
+                    <h1 className='text-white  pb-4'>College Teaser</h1>
+                    <video width={'400px'} height='200px' controls={true}>
+                        <source src={video} />
+                    </video>
                 </Col>
                 <Col className='bg-success' style={{ marginLeft: '10px', borderRadius: '10px' }}>
                     <h1 className='text-white'>Upcoming events</h1>
+                    <ul className='pt-4'>
+                        <li> <Link to='Menu/Events'>Technical Fest on JANUARY 21</Link></li>
+                        <li><Link to='Menu/Events'>Food fest on JANUARY 25</Link></li>
+                        <li><Link to='Menu/Events'>Traditional day on FEBRUARY 25</Link></li>
+                    </ul>
                 </Col>
             </Row>
         </Fragment>
