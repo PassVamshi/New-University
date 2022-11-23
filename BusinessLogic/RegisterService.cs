@@ -6,6 +6,7 @@ namespace BusinessLogic
     public interface IRegisterService
     {
         Register AddUser(Register register);
+        Register UpdateRegister(string oldPassword, string newPassword);
         IEnumerable<Register> GetUsers();
         Register GetUserWithId(int id);
         Register Login(string email, string password, int roleId);
@@ -13,9 +14,11 @@ namespace BusinessLogic
     public class RegisterService : IRegisterService
     {
         private readonly UniversityContext _universityContext;
-        public RegisterService(UniversityContext universityContext)
+        private readonly IUnitOfWork _uow;
+        public RegisterService(UniversityContext universityContext, IUnitOfWork uow)
         {
             _universityContext = universityContext;
+            _uow = uow;
         }
         public Register AddUser(Register register)
         {
@@ -47,6 +50,15 @@ namespace BusinessLogic
                 throw new InvalidOperationException();
             }
             return user;
+        }
+        public Register UpdateRegister(string oldPassword, string newPassword)
+        {
+            var register = _uow.GetDbSet<Register>().GetWithId(x => x.Password == oldPassword);
+            register.Password = newPassword;
+
+            _uow.GetDbSet<Register>().Update(register);
+            _uow.SaveChanges();
+            return register;
         }
     }
 }
