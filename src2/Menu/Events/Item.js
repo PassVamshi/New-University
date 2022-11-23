@@ -1,6 +1,6 @@
 import React from "react";
-import SweetAlert from "./Sweetalert";
-import "./item.scss";
+import SweetAlert from "../../utils/sweetAlert";
+import "./style.scss";
 
 function Item(props) {
   const data = {

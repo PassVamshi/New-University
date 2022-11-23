@@ -1,11 +1,12 @@
+import axios from "axios";
 import { Fragment, useState } from "react";
+import PasswordChecklist from "react-password-checklist";
 import { Button, Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 import InputBox from "../Components/InputBox";
 import SweetAlert from "../Menu/Events/Sweetalert";
-import PasswordChecklist from "react-password-checklist";
 
-const ChangePassword = () => {
-    const [state, setState] = useState({ oldPassword: '', newPassword: '' , cPassword:''})
+const ChangePassword = (props) => {
+    const [state, setState] = useState({ oldPassword: '', newPassword: '', cPassword: '' })
     const [error, setError] = useState(false);
     const handleChange = (name, value) => {
         if (name == 'oldPassword') {
@@ -14,13 +15,22 @@ const ChangePassword = () => {
         if (name == 'newPassword') {
             setState({ ...state, newPassword: value })
         }
-        if (name == 'cPassword' ) {
-           setState({...state, cPassword:value})
+        if (name == 'cPassword') {
+            setState({ ...state, cPassword: value })
         }
     }
     const handleSubmit = () => {
         debugger
+        try {
+            axios.put(`https://localhost:44323/api/Register/ChangePassword?oldPassword=${state.oldPassword}&newPassword=${state.newPassword}`).then((res) => {
+                localStorage.removeItem('login')
+                SweetAlert.handleClickTop();
+                props.history.push('/Login')
+            })
 
+        } catch {
+
+        }
     }
     return <Fragment>
         <Row className="pt-4">
@@ -45,18 +55,18 @@ const ChangePassword = () => {
             <Col md='3'>
                 <Card>
                     <CardBody>
-                    <PasswordChecklist
-                    rules={["minLength", "specialChar", "number", "capital", "match"]}
-                    minLength={5}
-                    value={state.newPassword}
-                    valueAgain={state.cPassword}
-                    onChange={(isValid) => {
-                        handleChange('validPassword', isValid);
-                    }}
-                />
+                        <PasswordChecklist
+                            rules={["minLength", "specialChar", "number", "capital", "match"]}
+                            minLength={5}
+                            value={state.newPassword}
+                            valueAgain={state.cPassword}
+                            onChange={(isValid) => {
+                                handleChange('validPassword', isValid);
+                            }}
+                        />
                     </CardBody>
                 </Card>
-               
+
             </Col>
         </Row>
     </Fragment>

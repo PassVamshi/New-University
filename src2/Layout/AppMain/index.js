@@ -10,17 +10,6 @@ const Dashboards = lazy(() => import('../../DemoPages/Dashboards'));
 
 const AppMain = () => {
     return <Fragment>
-        {/* <Suspense fallback={
-            <div className='loader-container'>
-                <div className='loader-container inner'>
-                    <h6 className='mt-5'>
-                        Please wait while we load all compoents
-                    </h6>
-                </div>
-            </div>
-        }>
-            <Route path='/Components' component={Components} />
-        </Suspense> */}
         <Suspense fallback={
             <div className='loader-container'>
                 <div className='loader-container inner'>

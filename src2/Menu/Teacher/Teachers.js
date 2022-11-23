@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import { Typeahead } from "react-bootstrap-typeahead";
-import { Card, CardBody, Col, Input, Row } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Button, Card, CardBody, Col, Input, Row } from "reactstrap";
 import PageHeader from "../../Components/PageHeader";
 import { BRANCH, GENDER, getFullDate, getTextFromArray, MARITALSTATUS, QUALIFICATION } from "../domain/BranchConstants";
 
@@ -36,8 +37,15 @@ const Teachers = () => {
     }
     return <Fragment>
         <PageHeader header="Faculty details" />
+
         {user == 2 ?
             <Card>
+                <Row>
+                    <Col md='10' />
+                    <Col md='2' className="pt-3">
+                        <Link to='/Menu/Teachers/AddTeacher'> <Button className='bg-success'>Add Teacher</Button></Link>
+                    </Col>
+                </Row>
                 <CardBody style={{ textAlign: 'left' }}>
                     <Row>
                         <Row className="pb-4">

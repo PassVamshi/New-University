@@ -1,17 +1,24 @@
-import {
-    faAngleDown
-} from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-import bgImage from '../..//../assets/utils/images/originals/abstract3.jpg'
 import { Col, DropdownMenu, DropdownToggle, NavLink, Row, UncontrolledButtonDropdown } from 'reactstrap';
 import image from '../../../Images/icon-5359553_1280.webp';
+import SweetAlert from '../../../Menu/Events/Sweetalert';
+import bgImage from '../..//../assets/utils/images/originals/abstract3.jpg';
 
 const UserBox = (props) => {
+    var history = useHistory();
     const Logout = () => {
         localStorage.removeItem('login');
-        window.location.reload();
+        SweetAlert.handleClickTop("Logged out successfully.")
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500)
+    }
+    const ChangePassword = () => {
+        history.push('/ChangePassword')
     }
     return (
         <Fragment>
@@ -28,7 +35,7 @@ const UserBox = (props) => {
                                             <FontAwesomeIcon className="ms-2 opacity-8" icon={faAngleDown} />
                                         </DropdownToggle>
 
-                                        <DropdownMenu style={{ width: '10px', backgroundImage:`url(${bgImage}) `}} right >
+                                        <DropdownMenu style={{ width: '10px', backgroundImage: `url(${bgImage}) ` }} right >
                                             <Row>
                                                 <Col md='4' />
                                                 <Col>   <img src={image} width="70px" height={"60px"} /></Col></Row>
@@ -37,11 +44,11 @@ const UserBox = (props) => {
                                                 <Col>    <NavLink href="#" onClick={() => Logout()}>
                                                     Log out
                                                 </NavLink></Col></Row>
-                                                <Row>
+                                            <Row>
                                                 <Col md='2' />
-                                                <Col>   <NavLink href="#" onClick={() => Logout()}>
-                                                Change Password
-                                            </NavLink></Col></Row>
+                                                <Col>   <NavLink href="#" onClick={() => ChangePassword()}>
+                                                    Change Password
+                                                </NavLink></Col></Row>
                                         </DropdownMenu>
                                     </UncontrolledButtonDropdown>
                                 </Col>
